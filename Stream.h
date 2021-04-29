@@ -14,6 +14,7 @@ class Stream {
 		//char * _streamFile;
 		Graph * graph;
 		bool samp;
+		bool detailed;
 		FILE * streamFile;
 		bool directed, streaming;
 		double * sampProb;
@@ -50,7 +51,7 @@ class Stream {
 		~Stream();
 		void runCensus(int K, int batchSize,bool debugprints);
 		//void printFilename() {printf("Well N nodes = %d and sfilename = %c\n",graph->numNodes(),sfilename[0]);}
-		void createStream(Graph * _g, bool samp, double * _sampProb, bool _dir, char * _streamF, char * _outFile, bool _streaming, int _base);
+		void createStream(Graph * _g, bool samp, double * _sampProb, bool _dir, char * _streamF, char * _outFile, bool _streaming, int _base, bool _detailed);
 		
 
 };

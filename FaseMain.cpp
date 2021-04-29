@@ -258,20 +258,8 @@ int main(int argc, char **argv)
     fprintf(stderr, "Subgraph size needs to be between 3 and %d...\n", MAXMOTIF - 1);
     return 1;
   }
-  /*
-  Random::init(time(NULL));
-  Fase* fase = new Fase(G, dir);
-  initSamplingProbabilities(fase);
-
-  Timer::start();
-  fase->runCensus(K);
-  Timer::stop();
-
-  output(fase);
-  finish(fase);
-  */
   
-  S->createStream(G,samp,sampProb,dir,sfilename,ofilename,stream,zeroBased);
+  S->createStream(G,samp,sampProb,dir,sfilename,ofilename,stream,zeroBased,detailed);
   
   S->runCensus(K,batchSize,debugprints);
   delete S;

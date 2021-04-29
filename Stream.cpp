@@ -11,7 +11,7 @@ Stream::~Stream(){
 }
 
 
-void Stream::createStream(Graph * _g, bool _samp,  double * _sampProb, bool _dir, char * _streamF, char * _outFile, bool _streaming, int _base){
+void Stream::createStream(Graph * _g, bool _samp,  double * _sampProb, bool _dir, char * _streamF, char * _outFile, bool _streaming, int _base, bool _detailed){
   
   graph = _g;
   directed = _dir;
@@ -23,6 +23,7 @@ void Stream::createStream(Graph * _g, bool _samp,  double * _sampProb, bool _dir
   samp = _samp;
   base = _base;
   streaming = _streaming;
+  detailed = _detailed;
   fase = NULL;
   K = 0;
   if (_outFile[0] == '0' && _outFile[1] == '\0')
@@ -129,11 +130,13 @@ void Stream::output()
   fprintf(f, "Global Computation time (ms): %0.4lf\n", global_timer->elapsed());
   fprintf(f, "Computation Time (ms): %0.6lf\n", local_timer->elapsed());
 
-  /*
+  if(detailed){
+    
+  
     fprintf(f, "\n\tDetailed Output:\n");
     for (auto element : fase->subgraphCount())
         fprintf(f, "%s: %d occurrences\n", element.second.c_str(), element.first);
-    //printf("end\n");*/
+ }
 }
 
 

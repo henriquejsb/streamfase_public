@@ -38,6 +38,33 @@ All commands:
 	-l : Use Adjacency List Only (Suitable for Large Scale or large networks [>10^5 nodes])
 	-q : Ignore arguments and prompt input
 
+Main Settings for StreamFase: `./FASE -s <Subgraph Size> -i <input file>  -Sf <updates file> [arguments...]`
+
+Additional commands for StreamFase and StreamFase (Batches):
+
+    -Sf : Name of file with updates (in an edge list format: (A/R) v1 v2 , where 'A' is for edge additions and R is for edge removals. Ex: A 1 2\nR 1 2)
+    -Rs : Use FaSE to recompute a census for every update instead of StreamFaSE (for validation of results or time comparison)
+    -Bs : Batch size. Applies updates in the updates file in batches of size Bs
+    -B : Activates StreamFase (Batches). 
+
+Example of usage:
+
+./FASE -s 3 -i Networks/Stream_networks/Undirected/email_original.edges -Sf Networks/Stream_networks/Undirected/email_updates.edges -z
+
+Calculates the initial census on email_original and applies every update in email_updates with StreamFase.
+
+./FASE -s 3 -i Networks/Stream_networks/Undirected/email_original.edges -Sf Networks/Stream_networks/Undirected/email_updates.edges -z -Bs 100
+
+Same as before but applies updates in batches of 100 updates. 
+
+./FASE -s 3 -i Networks/Stream_networks/Undirected/email_original.edges -Sf Networks/Stream_networks/Undirected/email_updates.edges -z -B -Bs 100
+
+Same as before but instead of using StreamFase for every update in the batch, applies all updates in each batch using StreamFase (Batches)
+
+Note: If you want to start with an empty network, the input file should only contain an edge between MAX_VERTICES + 1 MAX_VERTICES + 2 (see email_original)
+
+Note2: Code may contain artifacts of sampling but they are not currently working in this version. Please do not attempt to use sampling.
+
 ## Input Information
 The inputed networks should be in an edge list format, meaning that the input
 file should only contain lines with information about an edge, starting with
@@ -70,9 +97,11 @@ license restrictions apply to the usage of FaSE.
 
 ## Authors
 The Source Code was created by Pedro Paredes and Pedro Ribeiro from CRACS & INESC-TEC
-DCC-FCUP, Universidade do Porto, Portugal.
+DCC-FCUP, Universidade do Porto, Portugal. StreamFase was created by Henrique Branquinho and Luciano Grácio.
 
 Their contacts are:
 
 * [pparedes@dcc.fc.up.pt](mailto:pparedes@dcc.fc.up.pt)
 * [pribeiro@dcc.fc.up.pt](mailto:pribeiro@dcc.fc.up.pt)
+* [hjsbranquinho@gmail.com](mailto:hjsbranquinho@gmail.com)
+* [lgracio@fc.up.pt](mailto:lgracio@fc.up.pt)
